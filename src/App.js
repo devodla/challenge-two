@@ -14,11 +14,19 @@ function App() {
   },[]);
 
   async function handleAddRepository() {
-    // TODO
+    const response = await api.post('repositories', {
+      title: 'Challenge two',
+      url: 'https://github.com/onlyreynaldo/challenge-two',
+      techs: ['Node.js', 'ReactJS']
+    });
+
+    setRepositories([...repositories, response.data]);
   }
 
   async function handleRemoveRepository(id) {
-    // TODO
+    await api.delete(`repositories/${id}`);
+
+    setRepositories(repositories.filter(repositorie => repositorie.id !== id));
   }
 
   return (
